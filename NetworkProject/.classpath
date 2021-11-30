@@ -6,5 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/LG/Desktop/UNIV3-2/컴퓨터네트워크 및 실습(최재혁)/텀프로젝트/조사/NetworkProject-2019-master/NetworkProject-2019-master/Project/실행필요파일/core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LG/Desktop/UNIV3-2/컴퓨터네트워크 및 실습(최재혁)/텀프로젝트/조사/NetworkProject-2019-master/NetworkProject-2019-master/Project/실행필요파일/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
