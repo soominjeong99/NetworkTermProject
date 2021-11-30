@@ -258,8 +258,8 @@ public class Window extends PApplet {
                     try {
                     	 OutputStream output = null;
                      	try {
-                     		output = new FileOutputStream("C:\\java\\workspaces\\NetworkProject\\rank.txt");//승패 결과가 저장되는 txt 파일
-                 			String str = message;
+                     		output = new FileOutputStream("C:\\java\\workspaces\\NetworkProject\\rank.txt");//승패 결과가 저장                 			
+                     		String str = message;
                  			String result = null;
                  			
                  			if(message.equalsIgnoreCase("win"))
