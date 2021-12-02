@@ -31,12 +31,12 @@ public class UserAccountPool {
  
     // User의 정보를 제어할 메서드 정의
     
-    public String create(String id, String pass, String name) {    
+    public String create(String id, String pass, String name, String email, String sns) {    
     	//System.out.println("여기까지 오나? 제발 알려줘\n");
         if(accountMap.containsKey(id)) {
             return "false#이미 아이디가 존재합니다.";
         } else {
-            accountMap.put(id, new Account(id, pass, name));
+            accountMap.put(id, new Account(id, pass, name, email, sns));
             System.out.println(accountMap);
             return "true";
         }
@@ -45,7 +45,7 @@ public class UserAccountPool {
     
     public String login(String id, String pass, SocketAddress sa) {        // 로그인 
         if(accountMap.containsKey(id)) {
-            if(!currentUser.contains(new Account(id, "", ""))) {
+            if(!currentUser.contains(new Account(id, "", "", "", ""))) {
                 if(accountMap.get(id).getPass().equals(pass)) {
                     currentUser.add(accountMap.get(id));
                     accountMap.get(id).setSocketAddress(sa);

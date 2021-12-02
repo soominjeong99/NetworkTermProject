@@ -106,13 +106,21 @@ public class ClientNetwork extends Thread {
 
    // ==============================================================================
 
-   public void sendCreateRequest(String nick, String pass, String name, String repass) { // 회원신청
+   public void sendCreateRequest(String nick, String pass, String name, String email, String sns, String repass) { // 회원신청
       String resp = null;
       System.out.println(" [client] request : ");
       if (nick.trim().equals("") || pass.trim().equals("")) {
          JOptionPane.showMessageDialog(ui, "아이디와 비밀번호를 입력하세요.");
          return;
       }
+      if (name.trim().equals("")) {
+          JOptionPane.showMessageDialog(ui, "이름을 입력하세요.");
+          return;
+       }
+      if (email.trim().equals("") || sns.trim().equals("")) {
+          JOptionPane.showMessageDialog(ui, "이메일과 SNS주소를 입력하세요.");
+          return;
+       }
       if (!pass.equals(repass)) {
          JOptionPane.showMessageDialog(ui, "비밀번호를 확인하세요");
          return;
@@ -137,6 +145,8 @@ public class ClientNetwork extends Thread {
                ui.pnSignup.tfpw.setText("");
                ui.pnSignup.tfname.setText("");
                ui.pnSignup.tfrpw.setText("");
+               ui.pnSignup.tfemail.setText("");
+               ui.pnSignup.tfsns.setText("");
                JOptionPane.showMessageDialog(ui, "아이디가 생성되었습니다.");
                // 로그인 페이지로 이동.
                ui.setSize(400, 355);

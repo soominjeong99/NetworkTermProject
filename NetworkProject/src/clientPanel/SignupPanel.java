@@ -30,8 +30,8 @@ public class SignupPanel extends JPanel{ //회원가입 패널
     private Graphics screenGraphic;
     private Image panelImage;
     private Image selectedImage ;
-    private JTextField tfemail;
-    private JTextField tfsns;
+    public JTextField tfemail;
+    public JTextField tfsns;
   //  private Image backgroundImage = new ImageIcon(getClass().getResource("imge/123.gif")).getImage();
  
     public SignupPanel() {
@@ -66,6 +66,19 @@ public class SignupPanel extends JPanel{ //회원가입 패널
         tfrpw = new JPasswordField();
         tfrpw.setBounds(219, 336, 116, 24);
         add(tfrpw);
+        
+        //이메일의 새 버튼: tfemail
+        tfemail = new JTextField();
+        tfemail.setBounds(219, 399, 116, 21);
+        add(tfemail);
+        tfemail.setColumns(10);
+        
+        //sns의 새 버튼: tfsns
+        tfsns = new JTextField();
+        tfsns.setBounds(219, 458, 116, 21);
+        add(tfsns);
+        tfsns.setColumns(10);
+        
         // =============================================================================
         
         // 회원가입 완료 버튼=============================================================
@@ -143,17 +156,6 @@ public class SignupPanel extends JPanel{ //회원가입 패널
         label_4.setBounds(48, 456, 139, 18);
         add(label_4);
         
-        //이메일의 새 버튼: tfemail
-        tfemail = new JTextField();
-        tfemail.setBounds(219, 399, 116, 21);
-        add(tfemail);
-        tfemail.setColumns(10);
-        
-        //sns의 새 버튼: tfsns
-        tfsns = new JTextField();
-        tfsns.setBounds(219, 458, 116, 21);
-        add(tfsns);
-        tfsns.setColumns(10);
         
         JLabel agreement = new JLabel("\uD574\uB2F9 \uAC8C\uC784\uC758 \uAC1C\uC778\uC815\uBCF4 \uCDE8\uAE09 \uBC29\uCE68\uC5D0 \uB3D9\uC758\uD569\uB2C8\uB2E4");
         agreement.setForeground(Color.RED);

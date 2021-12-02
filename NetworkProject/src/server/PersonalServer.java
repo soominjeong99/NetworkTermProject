@@ -141,7 +141,7 @@ public class PersonalServer extends Thread {
 
          // 클라이언트의 요청에 따른 처리
          case "create":            // 회원가입
-            resp = accountPool.create(command[1], command[2], command[3]);
+            resp = accountPool.create(command[1], command[2], command[3], command[4], command[5]);
             sendToClient(resp);
             break;    
          case "join":            // 로그인

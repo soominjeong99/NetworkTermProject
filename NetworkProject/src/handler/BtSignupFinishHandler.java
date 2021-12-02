@@ -18,7 +18,10 @@ public class BtSignupFinishHandler implements ActionListener {
         String name = ui.pnSignup.tfname.getText().trim();
         String pass = String.valueOf(ui.pnSignup.tfpw.getPassword());
         String repass = String.valueOf(ui.pnSignup.tfrpw.getPassword());
-        ui.net.sendCreateRequest(nick, pass, name, repass);
+        String email = ui.pnSignup.tfemail.getText().trim();
+        String sns = ui.pnSignup.tfsns.getText().trim();
+
+        ui.net.sendCreateRequest(nick, pass, name, repass, email, sns);
         // ==============================================================
     }
     
