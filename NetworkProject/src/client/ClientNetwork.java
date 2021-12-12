@@ -150,7 +150,7 @@ public class ClientNetwork extends Thread {
                JOptionPane.showMessageDialog(ui, "아이디가 생성되었습니다.");
                // 로그인 페이지로 이동.
                ui.setSize(400, 355);
-               ui.setTitle("다섯 줄을 향한 무한한 도전 - 로그인");
+               ui.setTitle("4BINGO - 로그인");
                ui.setContentPane(ui.pnLogin);
                ui.pnLogin.tfid.setText(nick);
 
@@ -193,7 +193,7 @@ public class ClientNetwork extends Thread {
                ui.pnLogin.tfpw.setText("");
                ui.setSize(800, 800);
 
-               ui.setTitle("다섯 줄을 향한 무한한 도전 ");
+               ui.setTitle("4BINGO");
                ui.setLocationRelativeTo(null);
                System.out.println("hi my name is " + nick);
                ui.setContentPane(ui.pnRoom);
@@ -221,7 +221,7 @@ public class ClientNetwork extends Thread {
             if (resp == true) {
                JOptionPane.showMessageDialog(ui, "로그아웃 되었습니다.");
                ui.setSize(400, 355);
-               ui.setTitle("다섯 줄을 향한 무한한 도전 - 로그인");
+               ui.setTitle("4BINGO");
                ui.setLocationRelativeTo(null);
                ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                ui.setContentPane(ui.pnLogin);

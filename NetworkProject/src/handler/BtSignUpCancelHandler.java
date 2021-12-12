@@ -14,7 +14,7 @@ public class BtSignUpCancelHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // 로그인 패널로 이동 =====================
-        ui.setTitle("다섯 줄을 향한 무한한 도전 - 로그인");
+        ui.setTitle("4BINGO");
         ui.setSize(400, 355);
         ui.setContentPane(ui.pnLogin);
         // =======================================

@@ -16,7 +16,7 @@ public class BtSingnUpHandler implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         // 회원가입 패널로이동 ======================
-        ui.setTitle("다섯 줄을 향한 무한한 도전 - 회원가입");
+        ui.setTitle("4BINGO");
         ui.setLocationRelativeTo(null);
         ui.setSize(450, 700);
         ui.setContentPane(ui.pnSignup);
