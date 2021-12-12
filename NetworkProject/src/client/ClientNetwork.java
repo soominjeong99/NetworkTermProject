@@ -106,7 +106,7 @@ public class ClientNetwork extends Thread {
 
    // ==============================================================================
 
-   public void sendCreateRequest(String nick, String pass, String name, String email, String sns, String repass) { // 회원신청
+   public void sendCreateRequest(String nick, String pass, String name, String repass, String email, String sns) { // 회원신청
       String resp = null;
       System.out.println(" [client] request : ");
       if (nick.trim().equals("") || pass.trim().equals("")) {
@@ -133,7 +133,7 @@ public class ClientNetwork extends Thread {
          try {
 
             System.out.println(soc.getLocalPort());
-            oos.writeObject("create#" + nick + "#" + pass + "#" + name);
+            oos.writeObject("create#" + nick + "#" + pass + "#" + name + "#" + email+ "#" + sns);
 
             resp = (String)ois.readObject();
 
