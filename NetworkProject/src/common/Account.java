@@ -9,9 +9,6 @@ public class Account implements Serializable{  // 계정정보
     public String nick;         // 아이디
     private String pass;        // 비밀번호
     private String name;        // 이름
-    private String email;        // 이메일
-    private String sns;        // sns
-    
     private SocketAddress socketAddress;    // 접속한 ip와 port
     private int win;            
     private int lose;
@@ -21,12 +18,10 @@ public class Account implements Serializable{  // 계정정보
     private int maxScore;                 // 사용자의 최대 점수
     
     //======== 생성자 ================================
-    public Account(String nick, String pass, String name, String email, String sns) {
+    public Account(String nick, String pass, String name) {
         this.nick = nick;
         this.pass = pass;
         this.name = name;
-        this.email = email;
-        this.sns = sns;
         win = lose = draw = 0;
         joinRoomIndex = -1;        // 방에 들어가지 않은 상태
         this.socketAddress = null;
@@ -64,23 +59,7 @@ public class Account implements Serializable{  // 계정정보
     public void setName(String name) {
         this.name = name;
     }
-    
-    public String getEmail() {
-        return name;
-    }
  
-    public void setEmail(String email) {
-        this.email = email;
-    }    
-    
-    public String getSns() {
-        return sns;
-    }
- 
-    public void setSns(String sns) {
-        this.sns = sns;
-    }
-    
     public SocketAddress getSocketAddress() {
         return socketAddress;
     }

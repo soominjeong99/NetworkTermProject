@@ -8,23 +8,23 @@ public class CountDown implements Displayable {
 
     private static final int NONE = 0;
 
-    private final int omokPlateLength;
-    private final int omokPlateExternalXValue;
-    private final int omokPlateExternalYValue;
+    private final int bingoPlateLength;
+    private final int bingoPlateExternalXValue;
+    private final int bingoPlateExternalYValue;
     private final int textSize;
 
     private CountDownNum countDownNum;
 
-    public CountDown(int omokPlateLength, int omokPlateExternalXValue, int omokPlateExternalYValue) {
-        this.omokPlateLength = omokPlateLength;
-        this.omokPlateExternalXValue = omokPlateExternalXValue;
-        this.omokPlateExternalYValue = omokPlateExternalYValue;
+    public CountDown(int bingoPlateLength, int bingoPlateExternalXValue, int bingoPlateExternalYValue) {
+        this.bingoPlateLength = bingoPlateLength;
+        this.bingoPlateExternalXValue = bingoPlateExternalXValue;
+        this.bingoPlateExternalYValue = bingoPlateExternalYValue;
         textSize = getTextSize();
         countDownNum = new CountDownNum(0);
     }
 
     private int getTextSize() {
-        return omokPlateLength / 12;
+        return bingoPlateLength / 12;
     }
 
     public void display(PApplet p) {
@@ -34,7 +34,7 @@ public class CountDown implements Displayable {
         } else {
             p.fill(Color.BLACK.getValue());
             p.textSize(textSize);
-            p.text(countDownNum.getCountDown(), omokPlateExternalXValue + omokPlateLength / 2, omokPlateExternalYValue + omokPlateLength / 2);
+            p.text(countDownNum.getCountDown(), bingoPlateExternalXValue + bingoPlateLength / 2, bingoPlateExternalYValue + bingoPlateLength / 2);
         }
     }
 

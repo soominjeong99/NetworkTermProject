@@ -6,10 +6,10 @@ class ConstantWindow {
     static final int WIDTH = 600;
     static final int HEIGHT = 780;
 
-    static final int OMOK_LENGTH = 600;
-    static final int OMOK_EXTERNAL_X_VALUE = 0;
-    static final int OMOK_EXTERNAL_Y_VALUE = 180;
-    static final int OMOK_NUM = 15;
+    static final int BINGO_LENGTH = 600;
+    static final int BINGO_EXTERNAL_X_VALUE = 0;
+    static final int BINGO_EXTERNAL_Y_VALUE = 180;
+    static final int BINGO_NUM = 15;
 
     static final int READY_BUTTON_X = 20;
     static final int READY_BUTTON_Y = 20;

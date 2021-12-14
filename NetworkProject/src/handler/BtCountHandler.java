@@ -21,7 +21,7 @@ public class BtCountHandler implements ActionListener{
     	 try {
     		 
   	       // 바이트 단위로 파일읽기
-  	        String filePath = "C:\\java\\workspaces\\NetworkProject\\rank.txt"; // 승패를 저장할 대상 파일
+  	        String filePath = "./rank.txt"; // 승패를 저장할 대상 파일
   	        FileInputStream fileStream = null; // 파일 스트림
   	        
   	        fileStream = new FileInputStream( filePath );// 파일 스트림 생성

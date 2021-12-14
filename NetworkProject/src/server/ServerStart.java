@@ -12,7 +12,7 @@ public class ServerStart {
 			System.out.println("서버시작");
 			try(ServerSocket server = new ServerSocket(9999)){ 
 			while(!server.isClosed()) {
-				
+
 				Socket socket = server.accept();
 				Thread p = new PersonalServer(socket); // 쓰레드를 이용해 서버관리
 				p.start();

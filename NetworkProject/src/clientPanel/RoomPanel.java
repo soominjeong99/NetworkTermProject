@@ -43,20 +43,20 @@ public class RoomPanel extends JPanel { //방 패널
    public JButton btcount;
  //  private Image backgroundImage = new ImageIcon(getClass().getResource("imge/roomImage.jpg")).getImage();
    private JLabel lbInfoPicture;
-   
+
    @SuppressWarnings({ "unchecked", "serial" })
 public RoomPanel(ClientUI c) {
       // setBackground(new Color(51, 0, 0));
        setSize(800, 800);
        setLayout(null);
-       
+
        btList = new ArrayList<>();    // 방목록 버튼을 List로 관리 
     /*   // 내정보 패널 생성 ==========================================
        pnInfo = c.pnInfo;
        add(pnInfo);
        pnInfo.setBounds(34, 62, 200, 139);
       */ // ==========================================================    
-   
+
        // 내정보에 들어갈 이미지 =====================================
        //lbInfoPicture = new JLabel("");
      //  URL url3 = getClass().getResource("imge/mypsa4.png");
@@ -64,12 +64,12 @@ public RoomPanel(ClientUI c) {
       // lbInfoPicture.setIcon(new ImageIcon(url3));
        //pnInfo.add(lbInfoPicture);
        // ===========================================================
-       
+
        // 유저목록을 띄울 리스트 ======================================
        JScrollPane scrollPane = new JScrollPane();
        scrollPane.setBounds(34, 62, 200, 200);
        add(scrollPane); 
-       
+
        userList = new JList<Object>();
            userList.setCellRenderer(new DefaultListCellRenderer() {
                @Override
@@ -80,11 +80,11 @@ public RoomPanel(ClientUI c) {
            });        
        scrollPane.setViewportView(userList);
        // ===========================================================
-       
+
        textField = new JTextField(); //텍스트를 입력하는 창 
        textField.setBounds(34, 720, 200, 30);
        add(textField);
-       
+
        messageArea = new JTextArea();
        messageArea.setSize(200, 365);
        //add(messageArea);
@@ -102,7 +102,7 @@ public RoomPanel(ClientUI c) {
        btCreateRoom.setBounds(246, 679, 155, 71);
        add(btCreateRoom);
        // ===========================================================
-       
+
        // 로그아웃 ===================================================
        btLogOut = new JButton("L O G O U T");
       // btLogOut.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 18));
@@ -129,7 +129,7 @@ public RoomPanel(ClientUI c) {
        btExit.setFocusPainted(false);
        add(btExit);
        // ============================================================
-       
+
        // 빠른입장 ====================================================
       // URL url1 = getClass().getResource("imge/QuickStart.jpg");
        bthow = new JButton("\uCC44\uD305 \uB3C4\uC6C0\uB9D0");
@@ -139,7 +139,7 @@ public RoomPanel(ClientUI c) {
      //  btQuickStart.setIcon(new ImageIcon(url1));
        add(bthow);
        // ============================================================
-       
+
        // 방목록 띄우기 위한 리스트 ====================================
        JPanel panel = new JPanel();
        panel.setBackground(Color.WHITE);
@@ -156,7 +156,7 @@ public RoomPanel(ClientUI c) {
            btList.add(bt);
        }
        // =============================================================
-       
+
    }
- 
+
 }

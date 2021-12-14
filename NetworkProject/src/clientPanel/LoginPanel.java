@@ -1,5 +1,5 @@
 package clientPanel;
- 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
- 
+
 public class LoginPanel extends JPanel { //로그인 패널
     public JTextField tfid;
     public JButton btlogin;
@@ -25,15 +25,15 @@ public class LoginPanel extends JPanel { //로그인 패널
     private Image panelImage;
     private Image selectedImage ;
  //   private Image backgroundImage = new ImageIcon(getClass().getResource("imge/123.gif")).getImage();
- 
+
     public LoginPanel() {
         init();
     }
-    
+
     private void init() {
         setSize(400, 355);
         setLayout(null);
-        
+
         // 상단 로고 이미지 ===========================================================
         /*logo = new JLabel("");
         logo.setBounds(0, 0, 496, 300);
@@ -42,7 +42,7 @@ public class LoginPanel extends JPanel { //로그인 패널
         logo.setIcon(new ImageIcon(url));
         add(logo);*/
         // ===========================================================================
- 
+
       /*  //Background 배경입히기
         JPanel back = null;
         try {
@@ -55,7 +55,7 @@ public class LoginPanel extends JPanel { //로그인 패널
            } catch (NullPointerException ne){
               ne.printStackTrace();
            }*/
-        
+
         JLabel title = new JLabel("4 - BingGo");
         title.setForeground(Color.BLACK);
         title.setFont(new Font("함초롬바탕", Font.BOLD, 20));
@@ -68,13 +68,13 @@ public class LoginPanel extends JPanel { //로그인 패널
         add(tfid);
         tfid.setColumns(10);
         // ===========================================================================
-        
+
         // PW 입력 필드 ===============================================================
         tfpw = new JPasswordField();
         tfpw.setBounds(152, 187, 116, 24);
         add(tfpw);
         // ===========================================================================
-        
+
         // 라벨 ======================================================================
         JLabel lblNewLabel_1 = new JLabel("아이디 : ");
         lblNewLabel_1.setForeground(Color.BLACK);
@@ -82,7 +82,7 @@ public class LoginPanel extends JPanel { //로그인 패널
         lblNewLabel_1.setFont(new Font("함초롬바탕", Font.BOLD, 15));
         lblNewLabel_1.setBounds(72, 144, 62, 18);
         add(lblNewLabel_1);
-        
+
         JLabel lblNewLabel_2 = new JLabel("패스워드 : ");
         lblNewLabel_2.setForeground(Color.BLACK);
         lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -90,7 +90,7 @@ public class LoginPanel extends JPanel { //로그인 패널
         lblNewLabel_2.setBounds(42, 189, 91, 18);
         add(lblNewLabel_2);
         // ===========================================================================        
- 
+
         // 로그인 버튼 ================================================================
         btlogin = new JButton("로그인");
         btlogin.setBackground(Color.ORANGE);
@@ -102,7 +102,7 @@ public class LoginPanel extends JPanel { //로그인 패널
        // btlogin.setBackground(new Color(0, 0, 0, 0));
         add(btlogin);
         // ===========================================================================
- 
+
         // 회원가입 버튼 ==============================================================
         btsign = new JButton("회원가입");
         btsign.setBackground(Color.ORANGE);
@@ -114,14 +114,14 @@ public class LoginPanel extends JPanel { //로그인 패널
       //  btsign.setBackground(new Color(255, 255, 0, 0));
         add(btsign);
         // ===========================================================================
-        
+
         JLabel team = new JLabel("team 10");
         team.setForeground(Color.BLACK);
         team.setFont(new Font("함초롬바탕", Font.BOLD, 15));
         team.setHorizontalAlignment(SwingConstants.CENTER);
         team.setBounds(92, 297, 226, 58);
         add(team);
-        
+
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon(LoginPanel.class.getResource("/image/Logo.png")));
         lblNewLabel.setBounds(72, 10, 261, 91);

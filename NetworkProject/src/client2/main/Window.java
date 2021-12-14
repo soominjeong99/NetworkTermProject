@@ -16,9 +16,9 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Window extends PApplet {
-    private int omokEdge;
-    private int omokBlock;
-    private int omokBlockHalf;
+    private int bingoEdge;
+    private int bingoBlock;
+    private int bingoBlockHalf;
     public int win = 0;
     public int lose = 0;
 
@@ -28,7 +28,7 @@ public class Window extends PApplet {
     private float oppoDiceY;
     private float diceDiameter;
 
-    private ClientOmokPlate omokPlate;
+    private ClientBingoPlate bingoPlate;
     private Button readyButton;
     private Button exitButton;
 
@@ -71,32 +71,32 @@ public class Window extends PApplet {
 
         size(ConstantWindow.WIDTH, ConstantWindow.HEIGHT);
 
-        omokPlate = new ClientOmokPlate(ConstantWindow.OMOK_LENGTH,
-                ConstantWindow.OMOK_EXTERNAL_X_VALUE,
-                ConstantWindow.OMOK_EXTERNAL_Y_VALUE);
+        bingoPlate = new ClientBingoPlate(ConstantWindow.BINGO_LENGTH,
+                ConstantWindow.BINGO_EXTERNAL_X_VALUE,
+                ConstantWindow.BINGO_EXTERNAL_Y_VALUE);
 
         readyButton = new Button(ConstantWindow.READY_BUTTON_X,
                 ConstantWindow.READY_BUTTON_Y,
                 ConstantWindow.BUTTON_DIAMETER,
                 ConstantWindow.BUTTON_DIAMETER);
         readyButton.setLabel(ConstantWindow.READY_BUTTON_LABEL);
-        readyButton.setColor(Color.DARK_GREY.getValue());
+        readyButton.setColor(Color.LIGHT_GREY.getValue());
 
         exitButton = new Button(ConstantWindow.EXIT_BUTTON_X,
                 ConstantWindow.EXIT_BUTTON_Y,
                 ConstantWindow.BUTTON_DIAMETER,
                 ConstantWindow.BUTTON_DIAMETER);
         exitButton.setLabel(ConstantWindow.EXIT_BUTTON_LABEL);
-        exitButton.setColor(Color.DARK_GREY.getValue());
+        exitButton.setColor(Color.LIGHT_GREY.getValue());
 
         playersInfo = new PlayersInfo(ConstantWindow.PLAYERS_INFO_X,
                 ConstantWindow.PLAYERS_INFO_Y,
                 ConstantWindow.PLAYERS_INFO_WIDTH,
                 ConstantWindow.PLAYERS_INFO_HEIGHT);
 
-        omokEdge = getEdge();
-        omokBlock = getBlock();
-        omokBlockHalf = omokBlock / 2;
+        bingoEdge = getEdge();
+        bingoBlock = getBlock();
+        bingoBlockHalf = bingoBlock / 2;
 
         myDiceX = getMyDiceX();
         myDiceY = getMyDiceY();
@@ -110,54 +110,54 @@ public class Window extends PApplet {
         myTurn = false;
         winCheck = new WinCheck(false);
 
-        myColor = ConstantProtocol.BLACK_STONE;
+        myColor = ConstantProtocol.YELLOW_STONE;
         gameState = new GameState(GameState.WAITING);
         System.out.println("gameState: WAITING");
     }
 
     private int getEdge() {
-        return ConstantWindow.OMOK_LENGTH / 30;
+        return ConstantWindow.BINGO_LENGTH / 30;
     }
 
     private int getBlock() {
-        return (ConstantWindow.OMOK_LENGTH - 2 * omokEdge) / (ConstantWindow.OMOK_NUM - 1);
+        return (ConstantWindow.BINGO_LENGTH - 2 * bingoEdge) / (ConstantWindow.BINGO_NUM - 1);
     }
 
     private float getMyDiceX() {
-        return (ConstantWindow.OMOK_EXTERNAL_X_VALUE + omokEdge + 2 * omokBlock + omokBlockHalf);
+        return (ConstantWindow.BINGO_EXTERNAL_X_VALUE + bingoEdge + 2 * bingoBlock + bingoBlockHalf);
     }
 
     private float getMyDiceY() {
-        return ConstantWindow.OMOK_EXTERNAL_Y_VALUE + omokEdge + 5 * omokBlock;
+        return ConstantWindow.BINGO_EXTERNAL_Y_VALUE + bingoEdge + 5 * bingoBlock;
     }
 
     private float getOppoDiceX() {
-        return ConstantWindow.OMOK_EXTERNAL_X_VALUE + omokEdge + 8 * omokBlock + omokBlockHalf;
+        return ConstantWindow.BINGO_EXTERNAL_X_VALUE + bingoEdge + 8 * bingoBlock + bingoBlockHalf;
     }
 
     private float getOppoDiceY() {
-        return ConstantWindow.OMOK_EXTERNAL_Y_VALUE + omokEdge + 5 * omokBlock;
+        return ConstantWindow.BINGO_EXTERNAL_Y_VALUE + bingoEdge + 5 * bingoBlock;
     }
 
     private float getDiecDiameter() {
-        return omokBlock * 3;
+        return bingoBlock * 3;
     }
 
     private float getGameResultX() {
-        return ConstantWindow.OMOK_EXTERNAL_X_VALUE + ConstantWindow.OMOK_LENGTH / 2;
+        return ConstantWindow.BINGO_EXTERNAL_X_VALUE + ConstantWindow.BINGO_LENGTH / 2;
     }
 
     private float getGameResultY() {
-        return ConstantWindow.OMOK_EXTERNAL_Y_VALUE + ConstantWindow.OMOK_LENGTH / 2;
+        return ConstantWindow.BINGO_EXTERNAL_Y_VALUE + ConstantWindow.BINGO_LENGTH / 2;
     }
 
     @Override
     public void draw() {
 
-        this.background(Color.GREY.getValue());
+        this.background(102, 178, 255, 255);
         readyButton.display(this);
         exitButton.display(this);
-        omokPlate.display(this);
+        bingoPlate.display(this);
         playersInfo.display(this);
 
         checkMouseCursor();
@@ -209,11 +209,12 @@ public class Window extends PApplet {
                     int row = location.getRow();
                     int col = location.getCol();
                     int stoneColor = location.getColor();
-
-                    omokPlate.recordStone(row, col, stoneColor);
+                    
+                    bingoPlate.setStack(col, row);
+                    bingoPlate.recordStone(bingoPlate.getStack(col), col, stoneColor);
                     myTurn = myColor != stoneColor;
 
-                    System.out.println("row:" + row + " col:" + col);
+                    System.out.println("stone recorded row: " + row + " col:" + col);
 
                     break;
                 case ConstantProtocol.EXIT:
@@ -235,9 +236,9 @@ public class Window extends PApplet {
             case GameState.SET_ORDER:
                 if (!countDownFlag) {
                     countDownFlag = true;
-                    countDown = new CountDown(ConstantWindow.OMOK_LENGTH,
-                            ConstantWindow.OMOK_EXTERNAL_X_VALUE,
-                            ConstantWindow.OMOK_EXTERNAL_Y_VALUE);
+                    countDown = new CountDown(ConstantWindow.BINGO_LENGTH,
+                            ConstantWindow.BINGO_EXTERNAL_X_VALUE,
+                            ConstantWindow.BINGO_EXTERNAL_Y_VALUE);
                 }
                 if (countDown != null) {
                     countDown.display(this);
@@ -258,7 +259,7 @@ public class Window extends PApplet {
                     try {
                     	 OutputStream output = null;
                      	try {
-                     		output = new FileOutputStream("C:\\java\\workspaces\\NetworkProject\\rank.txt");//승패 결과 저장되는 파일                			
+                     		output = new FileOutputStream("./rank.txt");//승패 결과 저장되는 파일                			
                      		String str = message;
                  			String result = null;
                  			
@@ -296,10 +297,10 @@ public class Window extends PApplet {
     }
 
     private void setStoneViewsColor() {
-        if (myColor == ConstantProtocol.BLACK_STONE) {
+        if (myColor == ConstantProtocol.YELLOW_STONE) {
             playersInfo.setMineStoneView(Color.BLACK.getValue());
             playersInfo.setOpponentStoneView(Color.WHITE.getValue());
-        } else if (myColor == ConstantProtocol.WHITE_STONE) {
+        } else if (myColor == ConstantProtocol.RED_STONE) {
             playersInfo.setMineStoneView(Color.WHITE.getValue());
             playersInfo.setOpponentStoneView(Color.BLACK.getValue());
         }
@@ -310,7 +311,7 @@ public class Window extends PApplet {
         winCheck = new WinCheck(false);
         countDownFlag = false;
         resultMessageFlag = false;
-        omokPlate.initStones();
+        bingoPlate.initStones();
         while (!protocolQueue.isEmpty()) {
             protocolQueue.remove();
         }
@@ -320,7 +321,7 @@ public class Window extends PApplet {
         if (opponentDice != null) {
             opponentDice = makeDiceDisable();
         }
-        makeReadyButtonGrey();
+        makeReadyButtonWhite();
 
         playersInfo.stoneViewsInit();
     }
@@ -340,7 +341,7 @@ public class Window extends PApplet {
     }
 
     private void setMyColor(boolean myTurn) {
-        myColor = myTurn ? ConstantProtocol.BLACK_STONE : ConstantProtocol.WHITE_STONE;
+        myColor = myTurn ? ConstantProtocol.YELLOW_STONE : ConstantProtocol.RED_STONE;
     }
 
     private void checkMouseCursor() {
@@ -362,7 +363,7 @@ public class Window extends PApplet {
                 mouseValue = ARROW;
                 break;
             case GameState.RUNNING:
-                if (omokPlate.overVertex(mouseX, mouseY) && myTurn) {
+                if (bingoPlate.overVertex(mouseX, mouseY) && myTurn) {
                     cursor(HAND);
                     mouseValue = HAND;
                 } else {
@@ -399,12 +400,12 @@ public class Window extends PApplet {
     public void mousePressed() {
         if (mouseButton == LEFT && mouseValue == HAND) {
             if (readyButton.overRect(mouseX, mouseY)) {
-                if (readyButton.getColor() == Color.DARK_GREY.getValue()) {
+                if (readyButton.getColor() == Color.LIGHT_GREY.getValue()) {
                     sendReady();
                     makeReadyButtonBlack();
                 } else {
                     sendNotReady();
-                    makeReadyButtonGrey();
+                    makeReadyButtonWhite();
                 }
             } else if (exitButton.overRect(mouseX, mouseY)) {
             	exit();
@@ -412,15 +413,18 @@ public class Window extends PApplet {
                 
             } else {
 
-                int currentX = mouseX - ConstantWindow.OMOK_EXTERNAL_X_VALUE;
-                int currentY = mouseY - ConstantWindow.OMOK_EXTERNAL_Y_VALUE;
+                int currentX = mouseX - ConstantWindow.BINGO_EXTERNAL_X_VALUE;
+                int currentY = mouseY - ConstantWindow.BINGO_EXTERNAL_Y_VALUE;
 
-                int fixedX = omokPlate.editPosition(currentX);
-                int fixedY = omokPlate.editPosition(currentY);
+                int fixedX = bingoPlate.editPosition(currentX);
+                int fixedY = bingoPlate.editPosition(currentY);
 
-                int row = omokPlate.getIndex(fixedY);
-                int col = omokPlate.getIndex(fixedX);
-
+                
+                int col = bingoPlate.getIndex(fixedX);
+                bingoPlate.minusStack(col);
+                int row = bingoPlate.getStack(col);
+                
+                
                 sendLocation(row, col);
                 myTurn = false;
 
@@ -428,13 +432,13 @@ public class Window extends PApplet {
         }
     }
 
-    private void makeReadyButtonGrey() {
+    private void makeReadyButtonWhite() {
         readyButton = new Button(ConstantWindow.READY_BUTTON_X,
                 ConstantWindow.READY_BUTTON_Y,
                 ConstantWindow.BUTTON_DIAMETER,
                 ConstantWindow.BUTTON_DIAMETER);
         readyButton.setLabel(ConstantWindow.READY_BUTTON_LABEL);
-        readyButton.setColor(Color.DARK_GREY.getValue());
+        readyButton.setColor(Color.LIGHT_GREY.getValue());
     }
 
     private void makeReadyButtonBlack() {
@@ -490,7 +494,7 @@ public class Window extends PApplet {
 
     private void sendLocation(int row, int col) {
 
-        StoneLocation location = new StoneLocation(row, col, myColor);
+        StoneLocation location = new StoneLocation(bingoPlate.getStack(col), col, myColor);
         Gson gson = new Gson();
 
         String data = gson.toJson(location);

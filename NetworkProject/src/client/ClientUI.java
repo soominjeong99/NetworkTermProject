@@ -101,7 +101,7 @@ public class ClientUI extends JFrame{ // 클라이언트 GUI 제어
     private void setUIcomponent() {
         // Client UI에 출력할 패널 정의
     	
-        setTitle("다섯 줄을 향한 무한한 도전  - 로그인");
+        setTitle("4 Bingo - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(400, 355);

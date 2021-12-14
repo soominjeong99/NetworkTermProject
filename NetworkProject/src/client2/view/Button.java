@@ -46,7 +46,7 @@ public class Button implements Displayable {
 
     private void drawText(PApplet p) {
         p.textAlign(p.CENTER, p.CENTER);
-        p.fill(Color.LIGHT_GREY.getValue());
+        p.fill(Color.DARK_GREY.getValue());
         p.textSize(TEXT_SIZE);
         p.text(label, rectX + (width / 2), rectY + (height / 2));
     }

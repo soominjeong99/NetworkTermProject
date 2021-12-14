@@ -57,7 +57,10 @@ public class PlayersInfo implements Displayable {
     }
 
     private void drawMineStoneView(PApplet p) {
-        p.fill(mineStoneView.getColor());
+    	if (mineStoneView.getColor() == 0) //yellow
+    		p.fill(255, 255, 0, 255);
+    	else if (mineStoneView.getColor() == 255) //red
+    		p.fill(255, 0 , 0, 255);
         if (clientNum.getClientNum() == 1) {
             p.ellipse(rectX + (1 * width / 5), rectY + (height / 4) + 5, 35, 35);
         } else if (clientNum.getClientNum() == 2) {
@@ -67,7 +70,10 @@ public class PlayersInfo implements Displayable {
     }
 
     private void drawOpponentStoneView(PApplet p) {
-        p.fill(opponentStoneView.getColor());
+        if (opponentStoneView.getColor() == 0) // yellow
+        	p.fill(255, 255, 0, 255);
+        else if (opponentStoneView.getColor() == 255) //red
+        	p.fill(255, 0 , 0, 255);
         if (clientNum.getClientNum() == 1) {
             p.ellipse(rectX + (1 * width / 5), rectY + ((2 * height) / 3) + 5, 35, 35);
         } else if (clientNum.getClientNum() == 2) {

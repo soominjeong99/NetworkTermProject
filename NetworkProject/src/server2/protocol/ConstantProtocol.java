@@ -1,4 +1,4 @@
-package client2.protocol;
+package server2.protocol;
 
 public class ConstantProtocol {
     public static final int YELLOW_STONE = 0;

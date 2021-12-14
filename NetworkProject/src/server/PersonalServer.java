@@ -109,7 +109,7 @@ public class PersonalServer extends Thread {
          }catch(IOException | ClassNotFoundException e) {    // 종료시
             System.out.println("[server] 유저 종료");
          }
-         
+
          System.out.println("[server] received : " + received);
          if(received == null) {
             try {
@@ -120,7 +120,7 @@ public class PersonalServer extends Thread {
                e.printStackTrace();
             }
          }
-         
+
          if(received.startsWith("chat")) {
             command[0] ="chat";
             msg = received.substring(4);
@@ -141,7 +141,7 @@ public class PersonalServer extends Thread {
 
          // 클라이언트의 요청에 따른 처리
          case "create":            // 회원가입
-            resp = accountPool.create(command[1], command[2], command[3], command[4], command[5]);
+            resp = accountPool.create(command[1], command[2], command[3]);
             sendToClient(resp);
             break;    
          case "join":            // 로그인
@@ -192,7 +192,7 @@ public class PersonalServer extends Thread {
          case "roomlist":    // 방 목록 불러오기
             sendToClient(rooms);
             break;    
-            
+
          case "enterroom":        // 방 입장
                 user.setJoinRoomIndex(Integer.valueOf(command[1]));
                 int roomIndex = user.getJoinRoomIndex();
@@ -254,8 +254,8 @@ public class PersonalServer extends Thread {
                 whuser = accountPool.getAccountMap().get(command[1]);
                    sendAlramToUser(whuser.getSocketAddress(),"load#" + command[2]);
                    break;
-                  
-               
+
+
         }
     }
 }

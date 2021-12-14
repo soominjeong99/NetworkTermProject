@@ -1,4 +1,4 @@
-package client2.view;
+﻿package server2.strategy;
 
 class Stone {
 

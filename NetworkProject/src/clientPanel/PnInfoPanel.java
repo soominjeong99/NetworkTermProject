@@ -29,29 +29,29 @@ public class PnInfoPanel extends JPanel{
 		setSize(200, 139);
 		setBounds(30, 487, 192, 142);
 		setLayout(null);
-		
+
 		lbId = new JLabel("");
-		lbId.setFont(new Font("���ʷչ���", Font.BOLD, 12));
+		lbId.setFont(new Font("ÇÔÃÊ·Õ¹ÙÅÁ", Font.BOLD, 12));
 		lbId.setHorizontalAlignment(SwingConstants.CENTER);
 		lbId.setBounds(48, 83, 99, 22);
 		add(lbId);
-		
+
 		lbState = new JLabel("");
-		lbState.setFont(new Font("���ʷչ���", Font.BOLD, 12));
+		lbState.setFont(new Font("ÇÔÃÊ·Õ¹ÙÅÁ", Font.BOLD, 12));
 		lbState.setHorizontalAlignment(SwingConstants.CENTER);
 		lbState.setBounds(0, 107, 192, 25);
 		add(lbState);
-		
+
 		btMessage = new JButton("");
-		btMessage.setFont(new Font("���ʷչ���", Font.PLAIN, 12));
+		btMessage.setFont(new Font("ÇÔÃÊ·Õ¹ÙÅÁ", Font.PLAIN, 12));
 		btMessage.setMargin(new Insets(1, 1, 1, 1));
 		btMessage.setBackground(Color.WHITE);
 		btMessage.setBounds(150, 20, 30, 30);
 		add(btMessage);
 		btMessage.setFocusPainted(false);
-		
+
 	}
-	
+
 	/*public void paint(Graphics g) {
 	      panelImage = createImage(this.getWidth(), this.getHeight());
 	      screenGraphic= panelImage.getGraphics();
