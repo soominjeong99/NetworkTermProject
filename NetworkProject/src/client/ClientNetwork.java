@@ -1,10 +1,17 @@
 package client;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +33,7 @@ public class ClientNetwork extends Thread {
    private ClientUI ui; // 클라이언트 GUI
    private Account user; // 사용자정보
    private String nick;    // user을 저장하기 위한 nick
-
+   private String salt; //암호화를 위한
 
    public ClientNetwork(ClientUI c) {
       this.ui = c; 
@@ -133,11 +140,25 @@ public class ClientNetwork extends Thread {
          try {
 
             System.out.println(soc.getLocalPort());
+            
+            //암호화
+          //salt값 생성 
+            salt = Salt();
+            pass = SHA512(pass, salt);
+            
             oos.writeObject("create#" + nick + "#" + pass + "#" + name + "#" + email+ "#" + sns);
-
+            
             resp = (String)ois.readObject();
-
             System.out.println("[client] response : " + resp);
+            
+            //사용자 데이터 저장
+            OutputStream output = null;
+            output = new FileOutputStream("./userData.txt", true);
+            String userdata = null;
+            userdata = nick + " / " + pass + " / " + name + " / " + email+ " / " + sns + "\r\n";
+ 			output.write(userdata.getBytes());
+ 			output.close();
+ 			
             String[] data = resp.split("#");
             // 여기서 ui 제어.
             if (data[0].equals("true")) {
@@ -179,6 +200,8 @@ public class ClientNetwork extends Thread {
       synchronized (oos) {
          try {
             // 서버로 요청 =========================================
+            pass = SHA512(pass, salt);
+             
             oos.writeObject("join#" + nick + "#" + pass);
 
             // 서버로부터 결과 값 읽어옴
@@ -436,5 +459,31 @@ public class ClientNetwork extends Thread {
                     System.out.println(e.toString());
             }
         }
-    }    
+    }
+    
+    public static String Salt() { 
+    	String salt=""; 
+    	try { 
+    		SecureRandom random = SecureRandom.getInstance("SHA1PRNG"); 
+    		byte[] bytes = new byte[16]; 
+    		random.nextBytes(bytes); 
+    		salt = new String(Base64.getEncoder().encode(bytes)); 
+    		} 
+    	catch (NoSuchAlgorithmException e) { e.printStackTrace(); } 
+    	return salt; 
+    	
+    } 
+    //sha512 
+    public static String SHA512(String password, String hash) { 
+    	String salt = hash+password; 
+    	String hex = null; 
+    	try { 
+    		MessageDigest msg = MessageDigest.getInstance("SHA-512"); 
+    		msg.update(salt.getBytes());
+    		hex = String.format("%128x", new BigInteger(1, msg.digest())); 
+    		} catch (NoSuchAlgorithmException e) { 
+    			e.printStackTrace(); } 
+    	return hex; 
+    }
+
 }
