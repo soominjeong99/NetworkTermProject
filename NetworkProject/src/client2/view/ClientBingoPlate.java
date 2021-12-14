@@ -5,7 +5,7 @@ import client2.protocol.ConstantProtocol;
 import processing.core.PApplet;
 
 
-public class ClientOmokPlate implements Displayable {
+public class ClientBingoPlate implements Displayable {
 
     private static final int NUM = 15;
 
@@ -17,10 +17,12 @@ public class ClientOmokPlate implements Displayable {
     private final int edge;
     private final int block;
     private final int rangeSize;
+    
 
     private Stone[][] stones = new Stone[NUM][NUM];
+    public int[] stack = new int[NUM];
 
-    public ClientOmokPlate(int length, int externalXValue, int externalYValue) {
+    public ClientBingoPlate(int length, int externalXValue, int externalYValue) {
         this.length = length;
         this.externalXValue = externalXValue;
         this.externalYValue = externalYValue;
@@ -29,7 +31,10 @@ public class ClientOmokPlate implements Displayable {
         edge = getEdge();
         block = getBlock();
         rangeSize = getRangeSize();
-
+        
+        
+        
+        stack = new int[] {NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM};
         initStones();
     }
 
@@ -54,16 +59,15 @@ public class ClientOmokPlate implements Displayable {
     public void display(PApplet p) {
         drawFrame(p);
         drawCoordinate(p);
-        drawFourDot(p);
         drawStones(p);
     }
 
     private void drawFrame(PApplet p) {
         p.noStroke();
-        p.fill(Color.GREY.getValue());
+        p.fill(102, 178, 255, 255);
         p.rect(externalXValue, externalYValue, length, length);
 
-        p.fill(Color.LIGHT_GREY.getValue());
+        p.fill(Color.WHITE.getValue());
         p.stroke(Color.BLACK.getValue());
         p.strokeWeight(2);
         p.rect(externalXValue + edge , externalYValue + edge,  (NUM - 1) * block, (NUM - 1) * block);
@@ -79,24 +83,18 @@ public class ClientOmokPlate implements Displayable {
         }
     }
 
-    private void drawFourDot(PApplet p) {
-        p.fill(Color.BLACK.getValue());
-        p.ellipse(externalXValue + edge + 4 * block, externalYValue + edge + 4 * block, 8, 8);
-        p.ellipse(externalXValue + edge + 4 * block, externalYValue + edge + 10 * block, 8, 8);
-        p.ellipse(externalXValue + edge + 10 * block, externalYValue + edge + 4 * block, 8, 8);
-        p.ellipse(externalXValue + edge + 10 * block, externalYValue + edge + 10 * block, 8, 8);
-    }
-
+    
+    
     private void drawStones(PApplet p) {
         for (int i = 0; i < NUM; i++) {
             for (int j = 0; j < NUM; j++) {
-                if (stones[i][j].getValue() == Stone.BLACK_STONE) { //Black
-                    p.fill(Color.BLACK.getValue());
-                    p.ellipse(edge + j * block + externalXValue, edge + i * block + externalYValue,
+                if (stones[i][j].getValue() == Stone.YELLOW_STONE) { //Yellow
+                    p.fill(255, 255, 0, 255);
+                    p.ellipse(edge + (j + 1/2) * block + externalXValue, edge + (i + 1/2) * block + externalYValue,
                             stoneDiameter, stoneDiameter);
-                } else if (stones[i][j].getValue() == Stone.WHITE_STONE) { //white
-                    p.fill(Color.WHITE.getValue());
-                    p.ellipse(edge + j * block + externalXValue, edge + i * block + externalYValue,
+                } else if (stones[i][j].getValue() == Stone.RED_STONE) { //Red
+                    p.fill(255, 0, 0, 255);
+                    p.ellipse(edge + (j + 1/2) * block + externalXValue, edge + (i + 1/2) * block + externalYValue,
                             stoneDiameter, stoneDiameter);
                 }
             }
@@ -153,16 +151,31 @@ public class ClientOmokPlate implements Displayable {
 
 
     public void recordStone(int row, int col, int stoneFlag) {
-        int value = stoneFlag == ConstantProtocol.BLACK_STONE ? Stone.BLACK_STONE : Stone.WHITE_STONE;
-        stones[row][col].setValue(value);
+        int value = stoneFlag == ConstantProtocol.YELLOW_STONE ? Stone.YELLOW_STONE : Stone.RED_STONE;
+        stones[stack[col]][col].setValue(value);
+        System.out.println("recordStone" + stack[col] + " " + col);
+        
     }
-
+    
+    public void minusStack(int col) {
+    	stack[col]--;
+    }
+    
+    public int getStack(int col) {
+    	return stack[col];
+    }
+    
+    public void setStack(int col, int value) {
+    	stack[col] = value;
+    }
+    
     public void initStones() {
         for (int i = 0; i < NUM; i++) {
             for (int j = 0; j < NUM; j++) {
                 stones[i][j] = new Stone(Stone.NONE_STONE);
             }
         }
+        stack = new int[] {NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM, NUM};
     }
 
 }
